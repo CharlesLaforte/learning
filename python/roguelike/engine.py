@@ -24,11 +24,12 @@ def main():
 
     libtcod.console_set_custom_font('roguelike/arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
 
-    libtcod.console_init_root(screen_width, screen_height, 'proggraming bullshit annoying shit', False)
+    libtcod.console_init_root(screen_width, screen_height, 'Detekoi, boku no tomodachi, jibanyan, pretty pretty i am lovely pretty, pretty pretty pretty, Jibanyan', False)
 
     con = libtcod.console_new(screen_width, screen_height)
 
     game_map = GameMap(map_width, map_height)
+    game_map.make_map()
 
     key = libtcod.Key()
     mouse = libtcod.Mouse()
