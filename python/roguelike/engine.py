@@ -70,7 +70,7 @@ def main():
     key = libtcod.Key()
     mouse = libtcod.Mouse()
 
-    game_state = GameStates.PLAYERS_TURN
+    game_state = GameStates.PLAYER_TURN
 
     while not libtcod.console_is_window_closed():
         libtcod.sys_check_for_event(libtcod.EVENT_KEY_PRESS | libtcod.EVENT_MOUSE, key, mouse)
@@ -87,17 +87,18 @@ def main():
 
         clear_all(con, entities)
 
-        action = handle_keys(key)
+        action = handle_keys(key, game_state)
 
         move = action.get('move')
         pickup = action.get('pickup')
         show_inventory = action.get('show_inventory')
+        inventory_index = action.get('inventory_index')
         exit = action.get('exit')
         fullscreen = action.get('fullscreen')
 
         player_turn_results = []
 
-        if move and game_state == GameStates.PLAYERS_TURN:
+        if move and game_state == GameStates.PLAYER_TURN:
             dx, dy = move
 
             destination_x = player.x + dx
@@ -116,7 +117,7 @@ def main():
 
                 game_state = GameStates.ENEMY_TURN
 
-        elif pickup and game_state == GameStates.PLAYERS_TURN:
+        elif pickup and game_state == GameStates.PLAYER_TURN:
             for entity in entities:
                 if entity.item and entity.x == player.x and entity.y == player.y:
                     pickup_results = player.inventory.add_item(entity)
@@ -129,6 +130,12 @@ def main():
         if show_inventory:
             previous_game_state = game_state
             game_state = GameStates.SHOW_INVENTORY
+
+        if (inventory_index is not None and previous_game_state != GameStates.PLAYER_DEAD and \
+                                            inventory_index < len(player.inventory.items)):
+                
+            item = player.inventory.items[inventory_index]
+            print(item)
 
         if exit:
             if game_state == GameStates.SHOW_INVENTORY:
@@ -189,7 +196,7 @@ def main():
                         break
 
             else:                
-                game_state = GameStates.PLAYERS_TURN
+                game_state = GameStates.PLAYER_TURN
 
 if __name__ == '__main__':
     main()
