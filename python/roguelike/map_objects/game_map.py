@@ -8,6 +8,8 @@ from roguelike.render_functions import RenderOrder
 
 from roguelike.entity import Entity
 
+from roguelike.item_functions import heal
+
 from .rectangle import Rect
 from .tile import Tile
 
@@ -131,8 +133,9 @@ class GameMap:
             x = randint(room.x1 + 1, room.x2 -1)
             y = randint(room.y1 + 1, room.y2 - 1)
 
-            item_component = Item()
+            
             if not any([entity for entity in entities if entity.x == x and entity.y == y]):
+                item_component = Item(use_function=heal, amount=4)
                 item = Entity(x, y, '!', libtcod.violet, 'Healing Potion', render_order=RenderOrder.ITEM, 
                               item=item_component)
 

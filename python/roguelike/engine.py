@@ -58,8 +58,8 @@ def main():
     panel = libtcod.console_new(screen_width, panel_height)
 
     game_map = GameMap(map_width, map_height)
-    game_map.make_map(max_rooms, room_min_size, room_max_size, map_width, map_height, player, 
-                      entities, max_monsters_per_room, max_items_per_room)
+    game_map.make_map(max_rooms, room_min_size, room_max_size, map_width, map_height, player, entities, 
+                      max_monsters_per_room, max_items_per_room)
 
     fov_recompute = True
 
@@ -135,7 +135,7 @@ def main():
                                             inventory_index < len(player.inventory.items)):
                 
             item = player.inventory.items[inventory_index]
-            print(item)
+            player_turn_results.extend(player.inventory.use(item))
 
         if exit:
             if game_state == GameStates.SHOW_INVENTORY:
@@ -150,6 +150,7 @@ def main():
             message = player_turn_result.get('message')
             dead_entity = player_turn_result.get('dead')
             item_added = player_turn_result.get('item_added')
+            item_consumed = player_turn_result.get('consumed')
 
             if message:
                 message_log.add_message(message)
@@ -167,7 +168,10 @@ def main():
                 entities.remove(item_added)
 
                 game_state = GameStates.ENEMY_TURN  
-                previous_game_state = game_state    
+                previous_game_state = game_state 
+
+            if item_consumed:
+                game_state = GameStates.ENEMY_TURN   
 
         if game_state == GameStates.ENEMY_TURN:
             for entity in entities:
