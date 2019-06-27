@@ -122,7 +122,7 @@ class GameMap:
                                      render_order=RenderOrder.ACTOR, fighter=fighter_component, ai=ai_component)
 
                 else:
-                    fighter_component = Fighter(hp=16, defense=1, power=4)
+                    fighter_component = Fighter(hp=16, defense=1, power=30)
                     ai_component = BasicMonster()
                     monster = Entity(x, y, 'T', libtcod.darker_green, 'Troll', blocks=True, fighter=fighter_component,
                                      ai=ai_component)
@@ -135,7 +135,7 @@ class GameMap:
 
             
             if not any([entity for entity in entities if entity.x == x and entity.y == y]):
-                item_component = Item(use_function=heal, amount=4)
+                item_component = Item(use_function=heal, amount=1)
                 item = Entity(x, y, '!', libtcod.violet, 'Healing Potion', render_order=RenderOrder.ITEM, 
                               item=item_component)
 
