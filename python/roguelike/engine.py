@@ -34,8 +34,8 @@ def main():
     fov_light_walls = True
     fov_radius = 10
 
-    max_monsters_per_room = 3
-    max_items_per_room = 9
+    max_monsters_per_room = 99
+    max_items_per_room = 999
 
     colors = {
         'dark_wall': libtcod.Color(0, 0, 100),
@@ -44,7 +44,7 @@ def main():
         'light_ground': libtcod.Color(200, 180, 50)
     }
 
-    fighter_component = Fighter(hp=30, defense=2, power=5)
+    fighter_component = Fighter(hp=30, defense=2, power=99)
     inventory_component = Inventory(26)
     player = Entity(0, 0, '@', libtcod.white, 'Player', blocks=True, render_order=RenderOrder.ACTOR,
                     fighter=fighter_component, inventory=inventory_component)
