@@ -36,6 +36,6 @@ class Fighter:
             results.extend(target.fighter.take_damage(damage))
         else:
             results.append({'message': Message('{0} attacks {1} but does no damage.'.format(
-                self.owner.capitalize(), target.name), libtcod.white)})
+                self.owner.name.capitalize(), target.name), libtcod.white)})
 
         return results
