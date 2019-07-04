@@ -44,6 +44,7 @@ def get_constants():
         'panel_y': panel_y,
         'message_x': message_x,
         'message_width': message_width,
+        'message_height': message_height,
         'map_height': message_height,
         'map_width': map_width,
         'map_height': map_height,

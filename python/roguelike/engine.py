@@ -28,9 +28,9 @@ def main():
     con = libtcod.console_new(constants['screen_width'], constants['screen_height'])
     panel = libtcod.console_new(constants['screen_width'], constants['panel_height'])
 
-    game_map = GameMap(constants['map_width'], constants['map_height']
+    game_map = GameMap(constants['map_width'], constants['map_height'])
     game_map.make_map(constants['max_rooms'], constants['room_min_size'], constants['room_max_size'],
-                      constants['map_width']), constants['map_height'], player, entities,
+                      constants['map_width'], constants['map_height'], player, entities,
                       constants['max_monsters_per_room'], constants['max_items_per_room'])
 
     fov_recompute = True
